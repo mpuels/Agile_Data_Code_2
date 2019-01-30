@@ -105,7 +105,7 @@ case $DEFAULT_REGION in
   ;;
   us-west-2) UBUNTU_IMAGE_ID=ami-70873908
   ;;
-  us-east-2) UBUNTU_IMAGE_ID=ami-6a5f6a0f
+  us-east-2) UBUNTU_IMAGE_ID=ami-0f65671a86f061fcd
   ;;
   eu-west-2) UBUNTU_IMAGE_ID=ami-261a0042
   ;;
