@@ -40,6 +40,10 @@ module "vpc" {
   }
 }
 
+data "external" "my_public_ip" {
+  program = ["bash", "my_public_ip.sh"]
+}
+
 resource "aws_security_group" "ssh" {
   name        = "allow-ssh"
   description = "Allow SSH inbound traffic"
@@ -49,7 +53,7 @@ resource "aws_security_group" "ssh" {
     from_port   = 22
     protocol    = "TCP"
     to_port     = 22
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${data.external.my_public_ip.result.ip}/32"]
   }
 
   tags {
