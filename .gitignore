@@ -28,3 +28,6 @@ models
 deep/data
 .vscode
 .terraform/
+*.tfvars
+*.tfstate
+*.tfstate.backup
