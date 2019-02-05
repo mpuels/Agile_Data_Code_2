@@ -97,6 +97,16 @@ EOF
   }
 }
 
+resource "null_resource" "write_host_to_file" {
+  triggers {
+    always = "${uuid()}"
+  }
+
+  provisioner "local-exec" {
+    command = "echo ${aws_instance.this.public_ip} > ../.ec2_hostname"
+  }
+}
+
 resource "aws_instance" "this" {
   ami           = "${data.aws_ami.ubuntu-server-18-04.id}"
   instance_type = "${var.instance_type}"
