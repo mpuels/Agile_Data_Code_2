@@ -30,6 +30,13 @@ echo 'Executing: ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no 
 ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no -L 8888:localhost:8888 ubuntu@$EC2_HOSTNAME &
 echo ""
 
+# Create a tunnel for port 8889 for PySpark Jupyter notebooks
+echo "Next we will forward the port the PySpark Jupyter Notebooks use..."
+echo "Forwarding the remote machine's port 8889 to the local port 8889, which you can then access at http://localhost:8889"
+echo 'Executing: ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no -L 8889:localhost:8889 ubuntu@$EC2_HOSTNAME &'
+ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no -L 8889:localhost:8889 ubuntu@$EC2_HOSTNAME &
+echo ""
+
 # Create a tunnel for port 8080 for Airflow
 echo "Next we will forward the port that Airflow uses..."
 echo "Forwarding the remote machine's port 8080 to the local port 8080, which you can then access at http://localhost:8080"
