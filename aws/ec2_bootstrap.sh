@@ -213,8 +213,11 @@ echo 'spark.io.compression.codec org.apache.spark.io.SnappyCompressionCodec' | s
 # Give Spark 25GB of RAM, use Python3
 echo "spark.driver.memory 50g" | sudo tee -a $SPARK_HOME/conf/spark-defaults.conf
 echo "spark.executor.cores 12" | sudo tee -a $SPARK_HOME/conf/spark-defaults.conf
-echo "PYSPARK_PYTHON=python3" | sudo -u ubuntu tee -a $SPARK_HOME/conf/spark-env.sh
-echo "PYSPARK_DRIVER_PYTHON=python3" | sudo tee -a $SPARK_HOME/conf/spark-env.sh
+sudo -u ubuntu tee $SPARK_HOME/conf/spark-env.sh <<EOF
+PYSPARK_PYTHON=python3
+PYSPARK_DRIVER_PYTHON=jupyter
+PYSPARK_DRIVER_PYTHON_OPTS='notebook --ip=0.0.0.0 --port=8889 --no-browser --notebook-dir=/home/ubuntu/Agile_Data_Code_2'
+EOF
 
 # Setup log4j config to reduce logging output
 sudo -u ubuntu cp $SPARK_HOME/conf/log4j.properties.template $SPARK_HOME/conf/log4j.properties
