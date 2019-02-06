@@ -353,13 +353,13 @@ echo "sudo chown -R ubuntu /home/ubuntu/airflow" | sudo -u ubuntu tee -a /home/u
 echo "sudo chgrp -R ubuntu /home/ubuntu/airflow" | sudo -u ubuntu tee -a /home/ubuntu/.bash_profile
 
 # Jupyter server setup
-# echo "" | tee -a $LOG_FILE
-# echo "Starting Jupyter notebook server ..." | tee -a $LOG_FILE
-# jupyter-notebook --generate-config
-# cp /home/ubuntu/Agile_Data_Code_2/jupyter_notebook_config.py /home/ubuntu/.jupyter/
-# cd /home/ubuntu/Agile_Data_Code_2
-# jupyter-notebook --ip=0.0.0.0 &
-# cd /home/ubuntu
+echo "" | tee -a $LOG_FILE
+echo "Starting Jupyter notebook server ..." | tee -a $LOG_FILE
+su --login ubuntu -c 'jupyter-notebook --generate-config'
+sudo -u ubuntu cp /home/ubuntu/Agile_Data_Code_2/jupyter_notebook_config.py /home/ubuntu/.jupyter/
+cd /home/ubuntu/Agile_Data_Code_2
+su --login ubuntu -c 'jupyter-notebook --ip=0.0.0.0 &'
+cd /home/ubuntu
 
 # Install Ant to build Cassandra
 apt-get install -y ant
