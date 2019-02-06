@@ -2,7 +2,7 @@
 #
 # Script to download data for book
 #
-mkdir data
+mkdir -p data
 
 #
 # Get airplane data
