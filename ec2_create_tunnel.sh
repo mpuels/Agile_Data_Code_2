@@ -19,27 +19,28 @@ echo ""
 # Create a tunnel to our ssh instance, port 5000 and map it to localhost:5000
 echo "First we will forward the port the web appliations use..."
 echo "Forwarding the remote machine's port 5000 to the local port 5000, which you can then access at http://localhost:5000"
-echo 'Executing: ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no -L 5000:localhost:5000 ubuntu@$EC2_HOSTNAME &'
-ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no -L 5000:localhost:5000 ubuntu@$EC2_HOSTNAME &
 echo ""
 
 # Create a tunnel for port 8888 for Jupyter notebooks
 echo "Next we will forward the port the Jupyter Notebooks use..."
 echo "Forwarding the remote machine's port 8888 to the local port 8888, which you can then access at http://localhost:8888"
-echo 'Executing: ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no -L 8888:localhost:8888 ubuntu@$EC2_HOSTNAME &'
-ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no -L 8888:localhost:8888 ubuntu@$EC2_HOSTNAME &
 echo ""
 
 # Create a tunnel for port 8889 for PySpark Jupyter notebooks
 echo "Next we will forward the port the PySpark Jupyter Notebooks use..."
 echo "Forwarding the remote machine's port 8889 to the local port 8889, which you can then access at http://localhost:8889"
-echo 'Executing: ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no -L 8889:localhost:8889 ubuntu@$EC2_HOSTNAME &'
-ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no -L 8889:localhost:8889 ubuntu@$EC2_HOSTNAME &
 echo ""
 
 # Create a tunnel for port 8080 for Airflow
 echo "Next we will forward the port that Airflow uses..."
 echo "Forwarding the remote machine's port 8080 to the local port 8080, which you can then access at http://localhost:8080"
-echo 'Executing: ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no -L 8080:localhost:8080 ubuntu@$EC2_HOSTNAME &'
-ssh -N -i ./agile_data_science.pem -o StrictHostKeyChecking=no -L 8080:localhost:8080 ubuntu@$EC2_HOSTNAME &
 echo ""
+
+ssh -N -o StrictHostKeyChecking=no \
+    -L 4040:localhost:4040 \
+    -L 4041:localhost:4041 \
+    -L 5000:localhost:5000 \
+    -L 8888:localhost:8888 \
+    -L 8889:localhost:8889 \
+    -L 8080:localhost:8080 \
+    ubuntu@$EC2_HOSTNAME
